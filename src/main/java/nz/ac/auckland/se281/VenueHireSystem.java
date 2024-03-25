@@ -2,18 +2,37 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
+import nz.ac.auckland.se281.Venue;
+
+
+import java.util.ArrayList;
+
 
 public class VenueHireSystem {
 
-  public VenueHireSystem() {}
+ArrayList <Venue> Venues;
+
+
+  public VenueHireSystem() {
+    Venues = new ArrayList<>();
+  }
 
   public void printVenues() {
     // TODO implement this method
+    for (Venue venue : Venues) {
+      System.out.println("Venue Name: " + venue.venueName);
+  }
   }
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
+
+    Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
+    newVenue.NameCheck();
+
+    Venues.add(newVenue);
+  
   }
 
   public void setSystemDate(String dateInput) {
