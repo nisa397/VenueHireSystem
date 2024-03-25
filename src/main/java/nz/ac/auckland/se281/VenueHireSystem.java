@@ -17,21 +17,46 @@ ArrayList <Venue> Venues;
     Venues = new ArrayList<>();
   }
 
+  
+
   public void printVenues() {
     // TODO implement this method
-    for (Venue venue : Venues) {
-      System.out.println("Venue Name: " + venue.venueName);
+   
   }
-  }
+
+  public boolean NameCheck(String venueName){
+    if (venueName.isBlank()==true){
+      MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
+      return false;
+    }
+    else {
+      return true;
+    }
+      
+    }
+
+
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
 
+    boolean b;
+
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
-    newVenue.NameCheck();
+    
+    
+    
+    b=NameCheck(venueName);
+
+    System.out.println(b);
 
     Venues.add(newVenue);
+
+    for (Venue venue : Venues) {
+      System.out.println("Venue Name: " + venue.venueName);
+      System.out.println();
+  }
   
   }
 
