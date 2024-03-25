@@ -39,7 +39,6 @@ ArrayList <Venue> Venues;
   public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode){
     int count=0;
     for (Venue venue: Venues){
-      System.out.println(venue.venueCode);
       if (venueCode.equals(venue.venueCode)){
         count++;
         
@@ -106,13 +105,13 @@ ArrayList <Venue> Venues;
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
 
-    boolean b,c,d,e;
+    //boolean b,c,d,e;
 
     
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
     
     
-    b=NameCheck(venueName);
+   /* b=NameCheck(venueName);
     c=CodeCheck(Venues, venueCode);
     d=CapacityChecker(capacityInput);
     e=FeeChecker(hireFeeInput);
@@ -120,10 +119,15 @@ ArrayList <Venue> Venues;
     System.out.println(b);
     System.out.println(c);
     System.out.println(d);
-    System.out.println(e);
+    System.out.println(e);*/
+
+    if (NameCheck(venueName) && CodeCheck(Venues, venueCode) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
+      MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage();
+      Venues.add(newVenue);
+    }
 
 
-    Venues.add(newVenue);
+    
 
     
   
