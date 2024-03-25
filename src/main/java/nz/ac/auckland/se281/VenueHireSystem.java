@@ -56,13 +56,57 @@ ArrayList <Venue> Venues;
   }  
 
 
+  public boolean CapacityChecker(String capacityInput){
+
+    boolean isValid=false;
+    int CapacityInt=0;
+    try{
+      CapacityInt=Integer.parseInt(capacityInput);
+      
+      isValid= true;
+    }
+    catch(NumberFormatException e){
+
+    }
+
+    if (isValid && CapacityInt>=0){
+      return true;
+    }
+    else {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage();
+      return false;
+    } 
+    }
+    
+
+    public boolean FeeChecker(String hireFeeInput){
+      boolean isValid=false;
+      int hireFeeInt=0;
+      try{
+        hireFeeInt=Integer.parseInt(hireFeeInput);
+        
+        isValid= true;
+      }
+      catch(NumberFormatException e){
+
+      }
+
+      if (isValid && hireFeeInt>=0){
+        return true;
+      }
+      else {
+        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage();
+        return false;
+      } 
+      
+    }
 
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
 
-    boolean b,c;
+    boolean b,c,d;
 
     
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
@@ -70,10 +114,12 @@ ArrayList <Venue> Venues;
     
     b=NameCheck(venueName);
     c=CodeCheck(Venues, venueCode);
-
+    d=CapacityChecker(capacityInput);
 
     System.out.println(b);
     System.out.println(c);
+    System.out.println(d);
+
 
     Venues.add(newVenue);
 
