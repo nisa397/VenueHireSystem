@@ -106,7 +106,7 @@ ArrayList <Venue> Venues;
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
 
-    boolean b,c,d;
+    boolean b,c,d,e;
 
     
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
@@ -115,10 +115,12 @@ ArrayList <Venue> Venues;
     b=NameCheck(venueName);
     c=CodeCheck(Venues, venueCode);
     d=CapacityChecker(capacityInput);
+    e=FeeChecker(hireFeeInput);
 
     System.out.println(b);
     System.out.println(c);
     System.out.println(d);
+    System.out.println(e);
 
 
     Venues.add(newVenue);

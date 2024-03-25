@@ -29,16 +29,7 @@ public class Venue{
 
 
 
-//Checking if the venue code is valid
-public boolean CodeCheck(){
-  for (String iterator: Venues){
-    if (this.venueCode==iterator){
-      MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage();
-      return false;
-    }
-  }
-  return true;
-}  
+
 
 
 
