@@ -35,28 +35,49 @@ ArrayList <Venue> Venues;
       
     }
 
+    //Checking if the venue code is valid
+  public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode){
+    int count=0;
+    for (Venue venue: Venues){
+      System.out.println(venue.venueCode);
+      if (venueCode.equals(venue.venueCode)){
+        count++;
+        
+      }
+    }
+
+
+    if (count==1){
+      MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage();
+      return false;
+    }
+
+    return true;
+  }  
+
+
 
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
 
-    boolean b;
+    boolean b,c;
 
+    
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
     
     
-    
     b=NameCheck(venueName);
+    c=CodeCheck(Venues, venueCode);
+
 
     System.out.println(b);
+    System.out.println(c);
 
     Venues.add(newVenue);
 
-    for (Venue venue : Venues) {
-      System.out.println("Venue Name: " + venue.venueName);
-      System.out.println();
-  }
+    
   
   }
 
