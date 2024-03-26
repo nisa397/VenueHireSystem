@@ -10,18 +10,22 @@ import java.util.ArrayList;
 
 public class VenueHireSystem {
 
+  //initializes array list for venues to be stored
 ArrayList <Venue> Venues;
 
 
 
   public VenueHireSystem() {
+    //constructor
     Venues = new ArrayList<>();
   }
 
   
 
+  //Utilizes array list to store the the word numbers from one to nine
+  //the size method determines which number is printed out to indicate how many venues there are
+  // and to indicate whether it is printed in word form or in number form, depening on how many venues there are
   public void printVenues() {
-    // TODO implement this method
 
     ArrayList <String> NumberWords= new ArrayList<String>();
 
@@ -35,7 +39,6 @@ ArrayList <Venue> Venues;
     NumberWords.add("eight");
     NumberWords.add("nine");
     
-    //int NoOfVenues=Venues.size();
 
 
     if (Venues.size()==0){
@@ -65,6 +68,10 @@ ArrayList <Venue> Venues;
     }
   }
 
+
+  //Checks if Venue name input is empty or not
+  //utilizes isblank to check if the inputted venue name is blank or not, and method returns false, and prints otherwise, if it is blank
+  //otherwise returns true
   public boolean NameCheck(String venueName){
     if (venueName.trim().isBlank()==true){
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
@@ -76,7 +83,10 @@ ArrayList <Venue> Venues;
       
     }
 
-    //Checking if the venue code is valid
+    //Checking if the venue code is unique or not
+    //method iterates through arraylist, checking if there is a match between inputted venue code
+    // and existing venue codes, and prints error message, and returns false if so
+    // if not, then returns true
   public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode, String venueName){
     int count=0;
     for (Venue venue: Venues){
@@ -85,8 +95,6 @@ ArrayList <Venue> Venues;
         
       }
     }
-
-
     if (count==1){
       MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, venueName);
       return false;
@@ -96,6 +104,9 @@ ArrayList <Venue> Venues;
   }  
 
 
+  //Checks if the capacity input is a word number or an actual number
+  //If capacity input is invalid, it returns false, and prints out error message
+    //if capacity input is valid, it returns true 
   public boolean CapacityChecker(String capacityInput){
 
     boolean isValid=false;
@@ -119,6 +130,9 @@ ArrayList <Venue> Venues;
     }
     
 
+    //Checks if hire fee input is an actual number and not a word number
+    //If hire fee input is invalid, it returns false, and prints out error message
+    //if hire fee input is valid, it returns true 
     public boolean FeeChecker(String hireFeeInput){
       boolean isValid=false;
       int hireFeeInt=0;
@@ -144,23 +158,13 @@ ArrayList <Venue> Venues;
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    // TODO implement this method
 
-    //boolean b,c,d,e;
 
-    
+    //Constructor for venue instance
     Venue newVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
     
-    
-   /* b=NameCheck(venueName);
-    c=CodeCheck(Venues, venueCode);
-    d=CapacityChecker(capacityInput);
-    e=FeeChecker(hireFeeInput);
 
-    System.out.println(b);
-    System.out.println(c);
-    System.out.println(d);
-    System.out.println(e);*/
+    //If all of the inputs are valid, then the venue is added to the system, and the corresponding message is printed out
 
     if (NameCheck(venueName) && CodeCheck(Venues, venueCode, venueName) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(newVenue.venueName, newVenue.venueCode);
@@ -168,10 +172,6 @@ ArrayList <Venue> Venues;
     }
 
 
-    
-
-    
-  
   }
 
   public void setSystemDate(String dateInput) {
