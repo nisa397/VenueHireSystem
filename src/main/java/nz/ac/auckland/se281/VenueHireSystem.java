@@ -13,6 +13,7 @@ public class VenueHireSystem {
 ArrayList <Venue> Venues;
 
 
+
   public VenueHireSystem() {
     Venues = new ArrayList<>();
   }
@@ -21,7 +22,47 @@ ArrayList <Venue> Venues;
 
   public void printVenues() {
     // TODO implement this method
-   
+
+    ArrayList <String> NumberWords= new ArrayList<String>();
+
+    NumberWords.add("one");
+    NumberWords.add("two");
+    NumberWords.add("three");
+    NumberWords.add("four");
+    NumberWords.add("five");
+    NumberWords.add("six");
+    NumberWords.add("seven");
+    NumberWords.add("eight");
+    NumberWords.add("nine");
+    
+    //int NoOfVenues=Venues.size();
+
+
+    if (Venues.size()==0){
+      MessageCli.NO_VENUES.printMessage();
+    }
+    else if(Venues.size()==1){
+      MessageCli.NUMBER_VENUES.printMessage("is", NumberWords.get(Venues.size()-1), "");
+
+
+      for (Venue IteratorVenue: Venues){
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+      }
+    }
+    else if (1<Venues.size()&& Venues.size()<10){
+
+      MessageCli.NUMBER_VENUES.printMessage("are", NumberWords.get(Venues.size()-1), "s");
+      for (Venue IteratorVenue: Venues){
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+      }
+    }
+    else {
+      MessageCli.NUMBER_VENUES.printMessage("are",String.valueOf(Venues.size()), "s" );
+      for (Venue IteratorVenue: Venues){
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+      }
+
+    }
   }
 
   public boolean NameCheck(String venueName){
@@ -72,7 +113,7 @@ ArrayList <Venue> Venues;
       return true;
     }
     else {
-      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage();
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
       return false;
     } 
     }
@@ -94,7 +135,7 @@ ArrayList <Venue> Venues;
         return true;
       }
       else {
-        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage();
+        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee");
         return false;
       } 
       
@@ -122,7 +163,7 @@ ArrayList <Venue> Venues;
     System.out.println(e);*/
 
     if (NameCheck(venueName) && CodeCheck(Venues, venueCode) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
-      MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage();
+      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(newVenue.venueName, newVenue.venueCode);
       Venues.add(newVenue);
     }
 
