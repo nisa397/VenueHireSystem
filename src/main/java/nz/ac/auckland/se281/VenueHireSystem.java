@@ -135,7 +135,7 @@ ArrayList <Venue> Venues;
         return true;
       }
       else {
-        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee");
+        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
         return false;
       } 
       
