@@ -77,7 +77,7 @@ ArrayList <Venue> Venues;
     }
 
     //Checking if the venue code is valid
-  public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode){
+  public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode, String venueName){
     int count=0;
     for (Venue venue: Venues){
       if (venueCode.equals(venue.venueCode)){
@@ -88,7 +88,7 @@ ArrayList <Venue> Venues;
 
 
     if (count==1){
-      MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage();
+      MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, venueName);
       return false;
     }
 
@@ -162,7 +162,7 @@ ArrayList <Venue> Venues;
     System.out.println(d);
     System.out.println(e);*/
 
-    if (NameCheck(venueName) && CodeCheck(Venues, venueCode) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
+    if (NameCheck(venueName) && CodeCheck(Venues, venueCode, venueName) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(newVenue.venueName, newVenue.venueCode);
       Venues.add(newVenue);
     }
