@@ -25,7 +25,7 @@ ArrayList <Venue> Venues;
   }
 
   public boolean NameCheck(String venueName){
-    if (venueName.isBlank()==true){
+    if (venueName.trim().isBlank()==true){
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
       return false;
     }
