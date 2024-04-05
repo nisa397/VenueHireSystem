@@ -12,6 +12,7 @@ public class VenueHireSystem {
 
   //initializes array list for venues to be stored
 ArrayList <Venue> Venues;
+String systemDate;
 
 
 
@@ -174,14 +175,23 @@ ArrayList <Venue> Venues;
 
   }
 
+
+  //Task 2
   public void setSystemDate(String dateInput) {
     // TODO implement this method
-
-    MessageCli.DATE_SET.printMessage(dateInput);
+    this.systemDate=dateInput;
+    MessageCli.DATE_SET.printMessage(this.systemDate);
   }
 
   public void printSystemDate() {
     // TODO implement this method
+
+    if (this.systemDate.isBlank()){
+      MessageCli.CURRENT_DATE.printMessage("not set");
+    }
+    else {
+     MessageCli.CURRENT_DATE.printMessage(this.systemDate);
+    }
   }
 
   public void makeBooking(String[] options) {
@@ -192,6 +202,8 @@ ArrayList <Venue> Venues;
     // TODO implement this method
   }
 
+
+  //Task 3
   public void addCateringService(String bookingReference, CateringType cateringType) {
     // TODO implement this method
   }
