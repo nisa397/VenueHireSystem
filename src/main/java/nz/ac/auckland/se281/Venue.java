@@ -8,7 +8,7 @@ public class Venue{
   String venueCode;
   String capacityInput;
   String hireFeeInput;
- // ArrayList <String> venuCodeList;
+ 
 
 
  //Initialising constructor
@@ -19,9 +19,6 @@ public class Venue{
     this.hireFeeInput = hireFeeInput;
   }
 
-//Verifying inputs for the instance fields
-
-//Checking if venue name is valid
 
 
 
