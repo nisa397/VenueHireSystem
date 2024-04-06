@@ -3,6 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 import nz.ac.auckland.se281.Venue;
+import nz.ac.auckland.se281.Date;
 
 
 import java.util.ArrayList;
@@ -11,14 +12,14 @@ import java.util.ArrayList;
 public class VenueHireSystem {
 
   //initializes array list for venues to be stored
-ArrayList <Venue> Venues;
+ArrayList <Venue> venueList;
 String systemDate;
 
 
 
   public VenueHireSystem() {
     //constructor
-    Venues = new ArrayList<>();
+    venueList = new ArrayList<>();
   }
 
   
@@ -42,27 +43,27 @@ String systemDate;
     
 
 
-    if (Venues.size()==0){
+    if (venueList.size()==0){
       MessageCli.NO_VENUES.printMessage();
     }
-    else if(Venues.size()==1){
-      MessageCli.NUMBER_VENUES.printMessage("is", NumberWords.get(Venues.size()-1), "");
+    else if(venueList.size()==1){
+      MessageCli.NUMBER_VENUES.printMessage("is", NumberWords.get(venueList.size()-1), "");
 
 
-      for (Venue IteratorVenue: Venues){
+      for (Venue IteratorVenue: venueList){
         MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
       }
     }
-    else if (1<Venues.size()&& Venues.size()<10){
+    else if (1<venueList.size()&& venueList.size()<10){
 
-      MessageCli.NUMBER_VENUES.printMessage("are", NumberWords.get(Venues.size()-1), "s");
-      for (Venue IteratorVenue: Venues){
+      MessageCli.NUMBER_VENUES.printMessage("are", NumberWords.get(venueList.size()-1), "s");
+      for (Venue IteratorVenue: venueList){
         MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
       }
     }
     else {
-      MessageCli.NUMBER_VENUES.printMessage("are",String.valueOf(Venues.size()), "s" );
-      for (Venue IteratorVenue: Venues){
+      MessageCli.NUMBER_VENUES.printMessage("are",String.valueOf(venueList.size()), "s" );
+      for (Venue IteratorVenue: venueList){
         MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
       }
 
@@ -88,9 +89,9 @@ String systemDate;
     //method iterates through arraylist, checking if there is a match between inputted venue code
     // and existing venue codes, and prints error message, and returns false if so
     // if not, then returns true
-  public boolean CodeCheck(ArrayList <Venue> Venues, String venueCode, String venueName){
+  public boolean CodeCheck(ArrayList <Venue> venueList, String venueCode, String venueName){
     int count=0;
-    for (Venue venue: Venues){
+    for (Venue venue: venueList){
       if (venueCode.equals(venue.venueCode)){
         count++;
         
@@ -167,9 +168,9 @@ String systemDate;
 
     //If all of the inputs are valid, then the venue is added to the system, and the corresponding message is printed out
 
-    if (NameCheck(venueName) && CodeCheck(Venues, venueCode, venueName) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
+    if (NameCheck(venueName) && CodeCheck(venueList, venueCode, venueName) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(newVenue.venueName, newVenue.venueCode);
-      Venues.add(newVenue);
+      venueList.add(newVenue);
     }
 
 
@@ -192,6 +193,17 @@ String systemDate;
     else {
      MessageCli.CURRENT_DATE.printMessage(this.systemDate);
     }
+  }
+
+  public boolean venueCodePresent(String venueCode, ArrayList <Venue> venueList){
+
+    for (Venue venue: venueList){
+      if (venueCode==venue.venueCode){
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public void makeBooking(String[] options) {
