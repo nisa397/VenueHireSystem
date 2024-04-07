@@ -10,7 +10,7 @@ public class Venue{
   String venueCode;
   String capacityInput;
   String hireFeeInput;
-  Arraylist <Booking> bookingList;
+  ArrayList <Booking> bookingList;
 
  
 
@@ -22,6 +22,7 @@ public class Venue{
     this.capacityInput = capacityInput;
     this.hireFeeInput = hireFeeInput;
 
+    bookingList=new ArrayList<>();
 
   }
 
