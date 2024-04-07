@@ -132,10 +132,10 @@ String systemDate="";
     }
     
 
-    //Checks if hire fee input is an actual number and not a word number
+  //Checks if hire fee input is an actual number and not a word number
     //If hire fee input is invalid, it returns false, and prints out error message
     //if hire fee input is valid, it returns true 
-    public boolean FeeChecker(String hireFeeInput){
+  public boolean FeeChecker(String hireFeeInput){
       boolean isValid=false;
       int hireFeeInt=0;
       try{
@@ -198,7 +198,8 @@ String systemDate="";
 
   //Methods for makeBooking method
 
-  //Checks if system date is set
+
+  //Checks if system date is set, returns error message otherwise
   public boolean isSystemDateSet(){
     if (systemDate.isBlank()){
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
