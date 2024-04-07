@@ -13,7 +13,7 @@ public class VenueHireSystem {
 
   //initializes array list for venues to be stored
 ArrayList <Venue> venueList;
-String systemDate;
+String systemDate="";
 
 
 
@@ -198,7 +198,16 @@ String systemDate;
 
   //Methods for makeBooking method
 
-  
+  //Checks if system date is set
+  public boolean isSystemDateSet(){
+    if (systemDate.isBlank()){
+      MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
+      return false;
+    }
+    return true;
+  }
+
+
 
   //Checks if there is more than one venue in the system, by checking size of array list of venues
   public boolean atleastOneVenue(){
@@ -235,8 +244,10 @@ String systemDate;
 
     boolean a;
     boolean b;
+    boolean c;
     a=venueCodePresent(options[0], venueList);
     b=atleastOneVenue();
+    c=isSystemDateSet();
   }
 
   public void printBookings(String venueCode) {
