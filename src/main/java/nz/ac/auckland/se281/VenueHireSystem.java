@@ -195,26 +195,48 @@ String systemDate;
     }
   }
 
+
+  //Methods for makeBooking method
+
+  
+
+  //Checks if there is more than one venue in the system, by checking size of array list of venues
+  public boolean atleastOneVenue(){
+    if (venueList.size()<=1){
+      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  //Checks if venuecode is present by iterating through venue list, returns true if present, returns error message otherwise 
   public boolean venueCodePresent(String inputtedVenueCode, ArrayList <Venue> venueList){
 
-    //System.out.println(inputtedVenueCode);
+    
     for (Venue venue: venueList){
-      //System.out.println(venue.venueCode);
-      //System.out.println(inputtedVenueCode.equals(venue.venueCode));
+      
       if (inputtedVenueCode.equals(venue.venueCode)){
-        //System.out.println(inputtedVenueCode.equals(venue.venueCode));
+        
         return true;
       }
     }
 
+    MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(inputtedVenueCode);
     return false;
   }
 
   public void makeBooking(String[] options) {
     // TODO implement this method
+
+
+    
+
     boolean a;
+    boolean b;
     a=venueCodePresent(options[0], venueList);
-    System.out.println(a);
+    b=atleastOneVenue();
   }
 
   public void printBookings(String venueCode) {
