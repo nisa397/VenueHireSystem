@@ -195,10 +195,14 @@ String systemDate;
     }
   }
 
-  public boolean venueCodePresent(String venueCode, ArrayList <Venue> venueList){
+  public boolean venueCodePresent(String inputtedVenueCode, ArrayList <Venue> venueList){
 
+    //System.out.println(inputtedVenueCode);
     for (Venue venue: venueList){
-      if (venueCode==venue.venueCode){
+      //System.out.println(venue.venueCode);
+      //System.out.println(inputtedVenueCode.equals(venue.venueCode));
+      if (inputtedVenueCode.equals(venue.venueCode)){
+        //System.out.println(inputtedVenueCode.equals(venue.venueCode));
         return true;
       }
     }
@@ -208,6 +212,9 @@ String systemDate;
 
   public void makeBooking(String[] options) {
     // TODO implement this method
+    boolean a;
+    a=venueCodePresent(options[0], venueList);
+    System.out.println(a);
   }
 
   public void printBookings(String venueCode) {
