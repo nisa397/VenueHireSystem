@@ -304,9 +304,6 @@ Date systemDate= new Date(0, 0, 0, "");
     int month = Integer.parseInt(dateParts[1]);
     int year = Integer.parseInt(dateParts[2]);
     Date bookingDate = new Date(day, month, year, options[1]);
-    //boolean a= bookingDate.pastDate(systemDate);
-
-
 
     if (isSystemDateSet() && atleastOneVenue() && venueCodePresent(options[0], venueList) && bookingDate.pastDate(systemDate) && isVenueAvailable(options[1], options[0]) ){
       //Finding where the venue is located and storing that in the venueindex variable
@@ -319,7 +316,6 @@ Date systemDate= new Date(0, 0, 0, "");
 
     //Retrieves that specific venue from venueList
     specificVenue=venueList.get(venueIndex);
-    System.out.println(specificVenue.capacityInput);
     //If attendees is greater than capacity
     if (Integer.parseInt(options[3])>Integer.parseInt(specificVenue.capacityInput)){
 
@@ -335,18 +331,11 @@ Date systemDate= new Date(0, 0, 0, "");
     }
 
 
-    Booking newBooking = new Booking(options[0], options[1], options[2], options[3]);
+    Booking newBooking = new Booking(options[0], options[1], options[2], options[3], BookingReferenceGenerator.generateBookingReference());
     specificVenue.bookingList.add(newBooking);
-    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(BookingReferenceGenerator.generateBookingReference(), specificVenue.venueName,options[1], options[3]);
+    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(newBooking.bookingRef, specificVenue.venueName,options[1], options[3]);
     }
-    /*boolean a;
-    boolean b;
-    boolean c;
-    boolean d;
-    a=venueCodePresent(options[0], venueList);
-    b=atleastOneVenue();
-    c=isSystemDateSet();
-    d=isVenueAvailable(options[1], options[0]);*/
+    
 
 
 
@@ -354,6 +343,38 @@ Date systemDate= new Date(0, 0, 0, "");
 
   public void printBookings(String venueCode) {
     // TODO implement this method
+    Venue specificVenue;
+    int venueIndex=-1;
+
+    for (Venue venue : venueList) {
+      venueIndex++;
+      if (venueCode.equals(venue.venueCode)){
+        //Finding where the venue is located and storing that in the venueindex variable
+        //Retrieves that specific venue from venueList
+        specificVenue=venueList.get(venueIndex);
+
+        if (specificVenue.bookingList.size()>0){
+          for (Booking booking: specificVenue.bookingList) {
+            MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
+            MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(booking.bookingRef, booking.requestedDate);
+          }
+
+        }
+        else{
+          MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
+          MessageCli.PRINT_BOOKINGS_NONE.printMessage(specificVenue.venueName);
+
+
+        }
+      }
+      else{
+        MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
+      }
+    }
+
+
+
+
   }
 
 
