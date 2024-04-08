@@ -310,7 +310,7 @@ Date systemDate= new Date(0, 0, 0, "");
 
     if (isSystemDateSet() && atleastOneVenue() && venueCodePresent(options[0], venueList) && bookingDate.pastDate(systemDate) && isVenueAvailable(options[1], options[0]) ){
       //Finding where the venue is located and storing that in the venueindex variable
-    for (Venue venue: venueList){
+      for (Venue venue: venueList){
       venueIndex++;
       if (options[0].equals(venue.venueCode)){
         break;
@@ -319,6 +319,20 @@ Date systemDate= new Date(0, 0, 0, "");
 
     //Retrieves that specific venue from venueList
     specificVenue=venueList.get(venueIndex);
+    System.out.println(specificVenue.capacityInput);
+    //If attendees is greater than capacity
+    if (Integer.parseInt(options[3])>Integer.parseInt(specificVenue.capacityInput)){
+
+     options[3]=specificVenue.capacityInput;
+      
+    }
+    //if attendees is less than 25% of capacity
+
+    else if (Integer.parseInt(options[3])< 0.25 * (Integer.parseInt(specificVenue.capacityInput))){
+      int capacity25 = (int) (0.25 * (Integer.parseInt(specificVenue.capacityInput)));
+      
+      options[3]=Integer.toString(capacity25);
+    }
 
 
     Booking newBooking = new Booking(options[0], options[1], options[2], options[3]);
