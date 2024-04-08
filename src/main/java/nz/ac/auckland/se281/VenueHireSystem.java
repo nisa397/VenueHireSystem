@@ -316,11 +316,13 @@ Date systemDate= new Date(0, 0, 0, "");
 
     //Retrieves that specific venue from venueList
     specificVenue=venueList.get(venueIndex);
+
+    String originAttendees=options[3];
     //If attendees is greater than capacity
     if (Integer.parseInt(options[3])>Integer.parseInt(specificVenue.capacityInput)){
 
      options[3]=specificVenue.capacityInput;
-      
+     MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(originAttendees, options[3], specificVenue.capacityInput);
     }
     //if attendees is less than 25% of capacity
 
@@ -328,11 +330,11 @@ Date systemDate= new Date(0, 0, 0, "");
       int capacity25 = (int) (0.25 * (Integer.parseInt(specificVenue.capacityInput)));
       
       options[3]=Integer.toString(capacity25);
+      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(originAttendees, options[3], specificVenue.capacityInput); 
     }
-
-
     Booking newBooking = new Booking(options[0], options[1], options[2], options[3], BookingReferenceGenerator.generateBookingReference());
     specificVenue.bookingList.add(newBooking);
+    
     MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(newBooking.bookingRef, specificVenue.venueName,options[1], options[3]);
     }
     
