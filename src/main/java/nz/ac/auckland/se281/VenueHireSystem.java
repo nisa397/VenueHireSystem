@@ -4,6 +4,7 @@ import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 import nz.ac.auckland.se281.Venue;
 import nz.ac.auckland.se281.Date;
+import nz.ac.auckland.se281.Booking;
 
 
 import java.util.ArrayList;
@@ -178,6 +179,7 @@ String systemDate="";
 
 
   //Task 2
+
   public void setSystemDate(String dateInput) {
     // TODO implement this method
     this.systemDate=dateInput;
@@ -197,6 +199,42 @@ String systemDate="";
 
 
   //Methods for makeBooking method
+
+  
+
+  //
+  public boolean isVenueAvailable(String inputtedDate, String inputtedVenueCode){
+    Venue specificVenue;
+
+    int venueIndex=-1;
+
+    //Finding where the venue is located and storing that in the venueindex variable
+    for (Venue venue: venueList){
+      venueIndex++;
+      if (inputtedVenueCode.equals(venue.venueCode)){
+        break;
+      }
+    }
+
+    //Retrieves that specific venue from venueList
+    specificVenue=venueList.get(venueIndex);
+
+
+    //iterates through booking list of the specific venue and finding if that venue is already booked on that specific date
+    for (Booking booking: specificVenue.bookingList){
+
+      if (inputtedDate.equals(booking.requestedDate)){
+
+        MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(specificVenue.venueName, inputtedDate);
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  
+ 
 
 
   //Checks if system date is set, returns error message otherwise
@@ -239,16 +277,20 @@ String systemDate="";
 
   public void makeBooking(String[] options) {
     // TODO implement this method
-
-
+    //option[0] is venuecode
+    //option[1] is date
+    //option[2] is email
+    // option[3] is number of attendees
     
 
     boolean a;
     boolean b;
     boolean c;
+    boolean d;
     a=venueCodePresent(options[0], venueList);
     b=atleastOneVenue();
     c=isSystemDateSet();
+    d=isVenueAvailable(options[1], options[0]);
   }
 
   public void printBookings(String venueCode) {

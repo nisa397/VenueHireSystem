@@ -22,7 +22,7 @@ public class Venue{
     this.capacityInput = capacityInput;
     this.hireFeeInput = hireFeeInput;
 
-    bookingList=new ArrayList<>();
+    this.bookingList=new ArrayList<>();
 
   }
 
