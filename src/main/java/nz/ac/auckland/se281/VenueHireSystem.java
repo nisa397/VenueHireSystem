@@ -181,7 +181,6 @@ Date systemDate;
   //Task 2
 
   public void setSystemDate(String dateInput) {
-    // TODO implement this method
     //this.systemDate = dateInput;
     String[] dateParts = dateInput.split("/");
     int day = Integer.parseInt(dateParts[0]);
@@ -287,7 +286,13 @@ Date systemDate;
     //option[1] is date
     //option[2] is email
     // option[3] is number of attendees
-    
+    String[] dateParts = options[1].split("/");
+    int day = Integer.parseInt(dateParts[0]);
+    int month = Integer.parseInt(dateParts[1]);
+    int year = Integer.parseInt(dateParts[2]);
+    Date bookingDate = new Date(day, month, year, options[1]);
+    boolean a= bookingDate.pastDate(systemDate);
+
 
     /*boolean a;
     boolean b;
