@@ -14,7 +14,7 @@ public class VenueHireSystem {
 
   //initializes array list for venues to be stored
 ArrayList <Venue> venueList;
-String systemDate="";
+Date systemDate;
 
 
 
@@ -182,18 +182,24 @@ String systemDate="";
 
   public void setSystemDate(String dateInput) {
     // TODO implement this method
-    this.systemDate=dateInput;
-    MessageCli.DATE_SET.printMessage(this.systemDate);
+    //this.systemDate = dateInput;
+    String[] dateParts = dateInput.split("/");
+    int day = Integer.parseInt(dateParts[0]);
+    int month = Integer.parseInt(dateParts[1]);
+    int year = Integer.parseInt(dateParts[2]);
+    this.systemDate= new Date(day, month, year, dateInput);
+
+    MessageCli.DATE_SET.printMessage(this.systemDate.stringDate);
   }
 
   public void printSystemDate() {
     // TODO implement this method
 
-    if (this.systemDate.isBlank()){
+    if (this.systemDate.stringDate.isBlank()){
       MessageCli.CURRENT_DATE.printMessage("not set");
     }
     else {
-     MessageCli.CURRENT_DATE.printMessage(this.systemDate);
+     MessageCli.CURRENT_DATE.printMessage(this.systemDate.stringDate);
     }
   }
 
@@ -202,7 +208,7 @@ String systemDate="";
 
   
 
-  //
+  //Checks if venue is available on inputted date, by checking the booking list for that specific venue.
   public boolean isVenueAvailable(String inputtedDate, String inputtedVenueCode){
     Venue specificVenue;
 
@@ -239,7 +245,7 @@ String systemDate="";
 
   //Checks if system date is set, returns error message otherwise
   public boolean isSystemDateSet(){
-    if (systemDate.isBlank()){
+    if (systemDate.stringDate.isBlank()){
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
       return false;
     }
@@ -283,14 +289,17 @@ String systemDate="";
     // option[3] is number of attendees
     
 
-    boolean a;
+    /*boolean a;
     boolean b;
     boolean c;
     boolean d;
     a=venueCodePresent(options[0], venueList);
     b=atleastOneVenue();
     c=isSystemDateSet();
-    d=isVenueAvailable(options[1], options[0]);
+    d=isVenueAvailable(options[1], options[0]);*/
+
+
+
   }
 
   public void printBookings(String venueCode) {
