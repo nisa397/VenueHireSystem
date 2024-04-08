@@ -14,7 +14,7 @@ public class VenueHireSystem {
 
   //initializes array list for venues to be stored
 ArrayList <Venue> venueList;
-Date systemDate;
+Date systemDate= new Date(0, 0, 0, "");
 
 
 
@@ -181,12 +181,15 @@ Date systemDate;
   //Task 2
 
   public void setSystemDate(String dateInput) {
+    
+
     //this.systemDate = dateInput;
     String[] dateParts = dateInput.split("/");
-    int day = Integer.parseInt(dateParts[0]);
-    int month = Integer.parseInt(dateParts[1]);
-    int year = Integer.parseInt(dateParts[2]);
-    this.systemDate= new Date(day, month, year, dateInput);
+    this.systemDate.day = Integer.parseInt(dateParts[0]);
+    this.systemDate.month = Integer.parseInt(dateParts[1]);
+    this.systemDate.year = Integer.parseInt(dateParts[2]);
+    this.systemDate.stringDate = dateInput;
+    //this.systemDate= new Date(day, month, year, dateInput);
 
     MessageCli.DATE_SET.printMessage(this.systemDate.stringDate);
   }
@@ -255,7 +258,7 @@ Date systemDate;
 
   //Checks if there is more than one venue in the system, by checking size of array list of venues
   public boolean atleastOneVenue(){
-    if (venueList.size()<=1){
+    if (venueList.size()==0){
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
       return false;
     }
@@ -281,19 +284,47 @@ Date systemDate;
   }
 
   public void makeBooking(String[] options) {
+
+
     // TODO implement this method
     //option[0] is venuecode
     //option[1] is date
     //option[2] is email
     // option[3] is number of attendees
+
+    Venue specificVenue;
+
+    int venueIndex=-1;
+
+    
+
+    //Splitting the inputted date, changing it to int and creating a date instance
     String[] dateParts = options[1].split("/");
     int day = Integer.parseInt(dateParts[0]);
     int month = Integer.parseInt(dateParts[1]);
     int year = Integer.parseInt(dateParts[2]);
     Date bookingDate = new Date(day, month, year, options[1]);
-    boolean a= bookingDate.pastDate(systemDate);
+    //boolean a= bookingDate.pastDate(systemDate);
 
 
+
+    if (isSystemDateSet() && atleastOneVenue() && venueCodePresent(options[0], venueList) && bookingDate.pastDate(systemDate) && isVenueAvailable(options[1], options[0]) ){
+      //Finding where the venue is located and storing that in the venueindex variable
+    for (Venue venue: venueList){
+      venueIndex++;
+      if (options[0].equals(venue.venueCode)){
+        break;
+      }
+    }
+
+    //Retrieves that specific venue from venueList
+    specificVenue=venueList.get(venueIndex);
+
+
+    Booking newBooking = new Booking(options[0], options[1], options[2], options[3]);
+    specificVenue.bookingList.add(newBooking);
+    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(BookingReferenceGenerator.generateBookingReference(), specificVenue.venueName,options[1], options[3]);
+    }
     /*boolean a;
     boolean b;
     boolean c;
