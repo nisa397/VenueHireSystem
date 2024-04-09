@@ -345,13 +345,19 @@ Date systemDate= new Date(0, 0, 0, "");
 
   public void printBookings(String venueCode) {
     // TODO implement this method
+
+
+
+
+
+    /*
     Venue specificVenue;
     int venueIndex=-1;
 
     for (Venue venue : venueList) {
       venueIndex++;
       if (venueCode.equals(venue.venueCode)){
-        //Finding where the venue is located and storing that in the venueindex variable
+        //Finding where the venue is located and storing that in the venueIndex variable
         //Retrieves that specific venue from venueList
         specificVenue=venueList.get(venueIndex);
 
@@ -372,8 +378,46 @@ Date systemDate= new Date(0, 0, 0, "");
       else{
         MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
       }
-    }
+    }*/
 
+
+
+    Venue specificVenue;
+    int venueIndex=-1;
+    boolean venuePresent=false;
+
+
+    for (Venue venue : venueList) {
+      venueIndex++;
+      if (venueCode.equals(venue.venueCode)){
+        venuePresent=true;
+        break;
+        //Finding where the venue is located and storing that in the venueIndex variable
+        //Retrieves that specific venue from venueList
+        
+
+      }
+    }
+    
+    if (venuePresent){
+      specificVenue=venueList.get(venueIndex);
+      if (specificVenue.bookingList.size()>0){
+        for (Booking booking: specificVenue.bookingList) {
+          MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
+          MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(booking.bookingRef, booking.requestedDate);
+        }
+
+      }
+      else{
+        MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
+        MessageCli.PRINT_BOOKINGS_NONE.printMessage(specificVenue.venueName);
+
+
+      }
+    }
+    else {
+      MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
+    }
 
 
 
