@@ -52,20 +52,20 @@ Date systemDate= new Date(0, 0, 0, "");
 
 
       for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
       }
     }
     else if (1<venueList.size()&& venueList.size()<10){
 
       MessageCli.NUMBER_VENUES.printMessage("are", NumberWords.get(venueList.size()-1), "s");
       for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
       }
     }
     else {
       MessageCli.NUMBER_VENUES.printMessage("are",String.valueOf(venueList.size()), "s" );
       for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput );
+        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
       }
 
     }
@@ -283,6 +283,35 @@ Date systemDate= new Date(0, 0, 0, "");
     return false;
   }
 
+
+  public String nextAvailableDate(Venue venue){
+    String availableDate = systemDate.stringDate;
+    if (venue.bookingList.size()>0){
+      for (Booking booking: venue.bookingList){
+        if (availableDate.equals(booking.requestedDate)){
+
+          String[] dateParts = availableDate.split("/");
+          int intDay=Integer.parseInt(dateParts[0]) + 1;
+          if (intDay<10){
+            String stringDay="0"+Integer.toString(intDay);
+            availableDate= stringDay + "/" + dateParts[1] + "/"+ dateParts[2];
+          }
+          else {
+            String stringDay=Integer.toString(intDay);
+            availableDate= stringDay + "/" + dateParts[1] + "/"+ dateParts[2];
+          }
+         
+          
+
+        }
+      }
+    }
+
+    return availableDate;
+  }
+
+
+
   public void makeBooking(String[] options) {
 
 
@@ -345,42 +374,6 @@ Date systemDate= new Date(0, 0, 0, "");
 
   public void printBookings(String venueCode) {
     // TODO implement this method
-
-
-
-
-
-    /*
-    Venue specificVenue;
-    int venueIndex=-1;
-
-    for (Venue venue : venueList) {
-      venueIndex++;
-      if (venueCode.equals(venue.venueCode)){
-        //Finding where the venue is located and storing that in the venueIndex variable
-        //Retrieves that specific venue from venueList
-        specificVenue=venueList.get(venueIndex);
-
-        if (specificVenue.bookingList.size()>0){
-          for (Booking booking: specificVenue.bookingList) {
-            MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
-            MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(booking.bookingRef, booking.requestedDate);
-          }
-
-        }
-        else{
-          MessageCli.PRINT_BOOKINGS_HEADER.printMessage(specificVenue.venueName);
-          MessageCli.PRINT_BOOKINGS_NONE.printMessage(specificVenue.venueName);
-
-
-        }
-      }
-      else{
-        MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
-      }
-    }*/
-
-
 
     Venue specificVenue;
     int venueIndex=-1;
