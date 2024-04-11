@@ -5,17 +5,10 @@ public abstract class Service{
   String inpBookingRef;
   int cost;
 
-  /*public Service (String inpBookingRef){
+
+  public Service(String inpBookingRef){
     this.inpBookingRef=inpBookingRef;
-
-
-
-
-
-  }*/
-
-
-
+  }
 
 
   abstract public int calculatingCost();
