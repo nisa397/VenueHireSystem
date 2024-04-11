@@ -5,6 +5,11 @@ import nz.ac.auckland.se281.Types.FloralType;
 import nz.ac.auckland.se281.Venue;
 import nz.ac.auckland.se281.Date;
 import nz.ac.auckland.se281.Booking;
+import nz.ac.auckland.se281.Service;
+import nz.ac.auckland.se281.CateringService;
+import nz.ac.auckland.se281.FloralService;
+import nz.ac.auckland.se281.MusicService;
+
 
 
 import java.util.ArrayList;
@@ -14,6 +19,7 @@ public class VenueHireSystem {
 
   //initializes array list for venues to be stored
 ArrayList <Venue> venueList;
+ArrayList <Booking> allBookings;
 Date systemDate= new Date(0, 0, 0, "");
 
 
@@ -21,6 +27,7 @@ Date systemDate= new Date(0, 0, 0, "");
   public VenueHireSystem() {
     //constructor
     venueList = new ArrayList<>();
+    allBookings= new ArrayList<>();
   }
 
   
@@ -362,6 +369,7 @@ Date systemDate= new Date(0, 0, 0, "");
       MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(originAttendees, options[3], specificVenue.capacityInput); 
     }
     Booking newBooking = new Booking(options[0], options[1], options[2], options[3], BookingReferenceGenerator.generateBookingReference());
+    allBookings.add(newBooking);
     specificVenue.bookingList.add(newBooking);
     
     MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(newBooking.bookingRef, specificVenue.venueName,options[1], options[3]);
@@ -419,6 +427,10 @@ Date systemDate= new Date(0, 0, 0, "");
 
   //Task 3
   public void addCateringService(String bookingReference, CateringType cateringType) {
+    String cateringTypeName= cateringType.getName();
+    System.out.println(cateringTypeName);
+    int cateringTypeCost= cateringType.getCostPerPerson();
+    System.out.println(cateringTypeCost);
     // TODO implement this method
   }
 
