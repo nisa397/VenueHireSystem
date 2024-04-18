@@ -7,10 +7,8 @@ import nz.ac.auckland.se281.Date;
 import nz.ac.auckland.se281.Booking;
 import nz.ac.auckland.se281.Service;
 import nz.ac.auckland.se281.CateringService;
-import nz.ac.auckland.se281.FloralService;
 import nz.ac.auckland.se281.MusicService;
-
-
+import nz.ac.auckland.se281.FloralService;
 
 import java.util.ArrayList;
 
@@ -29,8 +27,41 @@ Date systemDate= new Date(0, 0, 0, "");
     venueList = new ArrayList<>();
     allBookings= new ArrayList<>();
   }
-
   
+  
+  public Venue getSpecificVenue(String venueCode, ArrayList<Venue> venueList){
+
+    Venue specificVenue;
+
+    int venueIndex=-1;
+
+    //Finding where the venue is located and storing that in the venueindex variable
+    for (Venue venue: venueList){
+      venueIndex++;
+      if (venueCode.equals(venue.venueCode)){
+        break;
+      }
+    }
+
+    //Retrieves that specific venue from venueList
+    specificVenue=venueList.get(venueIndex);
+
+    return specificVenue;
+  }
+
+  public Booking getSpecificBooking(String bookingRef, ArrayList<Booking> allBookings){
+    Booking specificBooking;
+
+    int bookingIndex=-1;
+    for (Booking booking : allBookings) {
+      bookingIndex++;
+      if (bookingRef.equals(booking.bookingRef)){
+        break;
+      }
+    }
+    specificBooking=allBookings.get(bookingIndex);
+    return specificBooking;
+  }
 
   //Utilizes array list to store the the word numbers from one to nine
   //the size method determines which number is printed out to indicate how many venues there are
@@ -426,11 +457,34 @@ Date systemDate= new Date(0, 0, 0, "");
 
 
   //Task 3
+
+
+  public boolean doesRefExist(ArrayList <Booking> allBookings, String inpBookingRef){
+
+    for (Booking booking: allBookings){
+
+      if (booking.bookingRef.equals(inpBookingRef)){
+        return true;
+
+      }
+    }
+
+    return false;
+  }
+
+
   public void addCateringService(String bookingReference, CateringType cateringType) {
-    String cateringTypeName= cateringType.getName();
-    System.out.println(cateringTypeName);
-    int cateringTypeCost= cateringType.getCostPerPerson();
-    System.out.println(cateringTypeCost);
+
+    if (doesRefExist(allBookings, bookingReference)){
+      Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      int intAttendees = Integer.parseInt(specificBooking.attendees);
+      CateringService catering= new CateringService(intAttendees, cateringType);
+      specificBooking.servicesList.add(catering);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Catering "+"("+cateringType.getName()+")", bookingReference);
+    }
+    else{
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
+    }
     // TODO implement this method
   }
 
