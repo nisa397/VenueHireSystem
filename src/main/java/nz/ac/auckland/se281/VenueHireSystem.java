@@ -491,8 +491,8 @@ Date systemDate= new Date(0, 0, 0, "");
   public void addServiceMusic(String bookingReference) {
     if (doesRefExist(allBookings, bookingReference)){
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
-      MusicService musicService= new MusicService();
-      specificBooking.servicesList.add(musicService);
+      MusicService music= new MusicService();
+      specificBooking.servicesList.add(music);
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
     }
     else {
@@ -502,7 +502,17 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
-    // TODO implement this method
+    if (doesRefExist(allBookings, bookingReference)){
+      Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      FloralService floral = new FloralService(floralType);
+      specificBooking.servicesList.add(floral);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral "+"("+floralType.getName()+")",bookingReference);
+    }
+    else{
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    }
+    // TODO implement this metho
+
   }
 
   public void viewInvoice(String bookingReference) {
