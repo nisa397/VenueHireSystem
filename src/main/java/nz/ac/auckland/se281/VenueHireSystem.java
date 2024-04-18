@@ -489,6 +489,15 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void addServiceMusic(String bookingReference) {
+    if (doesRefExist(allBookings, bookingReference)){
+      Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      MusicService musicService= new MusicService();
+      specificBooking.servicesList.add(musicService);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
+    }
+    else {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
+    }
     // TODO implement this method
   }
 
