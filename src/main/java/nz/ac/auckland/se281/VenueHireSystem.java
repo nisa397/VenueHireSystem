@@ -399,7 +399,7 @@ Date systemDate= new Date(0, 0, 0, "");
       options[3]=Integer.toString(capacity25);
       MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(originAttendees, options[3], specificVenue.capacityInput); 
     }
-    Booking newBooking = new Booking(options[0], options[1], options[2], options[3], BookingReferenceGenerator.generateBookingReference());
+    Booking newBooking = new Booking(options[0], options[1], options[2], options[3], BookingReferenceGenerator.generateBookingReference(), this.systemDate.stringDate);
     allBookings.add(newBooking);
     specificVenue.bookingList.add(newBooking);
     
@@ -517,5 +517,15 @@ Date systemDate= new Date(0, 0, 0, "");
 
   public void viewInvoice(String bookingReference) {
     // TODO implement this method
+    if (doesRefExist(allBookings, bookingReference)){
+      
+      Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      Venue specificVenue=getSpecificVenue(specificBooking.venueCode, venueList);
+      MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(bookingReference, specificBooking.email, specificBooking.dateOfBooking, specificBooking.requestedDate, specificBooking.attendees, specificVenue.venueName);
+
+      //Cost Breakdown
+      MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(specificVenue.hireFeeInput);
+    }
+    
   }
 }

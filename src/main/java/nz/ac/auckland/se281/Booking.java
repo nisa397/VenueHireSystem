@@ -10,10 +10,12 @@ public class Booking{
   String attendees;
   String bookingRef;
   ArrayList <Service> servicesList;
+  String dateOfBooking;
 
-  public Booking(String venueCode, String requestedDate, String email, String attendees, String bookingRef){
+  public Booking(String venueCode, String requestedDate, String email, String attendees, String bookingRef, String dateOfBooking){
     this.venueCode=venueCode;
     this.requestedDate=requestedDate;
+    this.dateOfBooking=dateOfBooking;
     this.email=email;
     this.attendees=attendees;
     this.bookingRef=bookingRef;
