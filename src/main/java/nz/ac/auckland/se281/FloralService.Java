@@ -7,8 +7,8 @@ public class FloralService extends Service{
 
 
 
-  public FloralService(FloralType floralType, String inpBookingRef){
-    super(inpBookingRef);
+  public FloralService(FloralType floralType, String service){
+    super(service);
     this.floralType=floralType;
     this.cost=calculatingCost();
   }
