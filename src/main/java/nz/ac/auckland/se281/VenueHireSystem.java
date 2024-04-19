@@ -233,7 +233,7 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void printSystemDate() {
-    // TODO implement this method
+  
 
     if (this.systemDate.stringDate.isBlank()){
       MessageCli.CURRENT_DATE.printMessage("not set");
@@ -353,7 +353,7 @@ Date systemDate= new Date(0, 0, 0, "");
   public void makeBooking(String[] options) {
 
 
-    // TODO implement this method
+    
     //option[0] is venuecode
     //option[1] is date
     //option[2] is email
@@ -412,7 +412,6 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void printBookings(String venueCode) {
-    // TODO implement this method
 
     Venue specificVenue;
     int venueIndex=-1;
@@ -485,7 +484,7 @@ Date systemDate= new Date(0, 0, 0, "");
     else{
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     }
-    // TODO implement this method
+    
   }
 
   public void addServiceMusic(String bookingReference) {
@@ -498,7 +497,7 @@ Date systemDate= new Date(0, 0, 0, "");
     else {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     }
-    // TODO implement this method
+   
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
@@ -511,13 +510,12 @@ Date systemDate= new Date(0, 0, 0, "");
     else{
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     }
-    // TODO implement this metho
+    
 
   }
 
   public void viewInvoice(String bookingReference) {
     int cost=0;
-    // TODO implement this method
     if (doesRefExist(allBookings, bookingReference)){
       
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
