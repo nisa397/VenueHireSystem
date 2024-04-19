@@ -478,7 +478,7 @@ Date systemDate= new Date(0, 0, 0, "");
     if (doesRefExist(allBookings, bookingReference)){
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
       int intAttendees = Integer.parseInt(specificBooking.attendees);
-      CateringService catering= new CateringService(intAttendees, cateringType);
+      CateringService catering= new CateringService(intAttendees, cateringType, "Catering");
       specificBooking.servicesList.add(catering);
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Catering "+"("+cateringType.getName()+")", bookingReference);
     }
@@ -491,7 +491,7 @@ Date systemDate= new Date(0, 0, 0, "");
   public void addServiceMusic(String bookingReference) {
     if (doesRefExist(allBookings, bookingReference)){
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
-      MusicService music= new MusicService();
+      MusicService music= new MusicService("Music");
       specificBooking.servicesList.add(music);
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
     }
@@ -504,7 +504,7 @@ Date systemDate= new Date(0, 0, 0, "");
   public void addServiceFloral(String bookingReference, FloralType floralType) {
     if (doesRefExist(allBookings, bookingReference)){
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
-      FloralService floral = new FloralService(floralType);
+      FloralService floral = new FloralService(floralType, "Floral");
       specificBooking.servicesList.add(floral);
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral "+"("+floralType.getName()+")",bookingReference);
     }

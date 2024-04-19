@@ -2,7 +2,8 @@ package nz.ac.auckland.se281;
 
 public class MusicService extends Service{
   int cost;
-  public MusicService(){
+  public MusicService(String service){
+    super(service);
   }
 
 

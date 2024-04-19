@@ -7,7 +7,8 @@ public class CateringService extends Service{
   private CateringType cateringType;
   int cost;
 
-  public CateringService(int noOfAttendees, CateringType cateringType){
+  public CateringService(int noOfAttendees, CateringType cateringType, String service){
+    super(service);
     this.noOfAttendees=noOfAttendees;
     this.cateringType=cateringType;
     this.cost=calculatingCost();
