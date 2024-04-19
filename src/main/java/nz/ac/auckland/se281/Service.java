@@ -8,6 +8,7 @@ public abstract class Service{
     this.serviceType=serviceType;
   }
 
+  //Every service calculates cost differently
   abstract public int calculatingCost();
 
   

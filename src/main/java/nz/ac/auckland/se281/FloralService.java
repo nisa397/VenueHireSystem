@@ -18,6 +18,7 @@ public class FloralService extends Service{
   }
 
   //Calculates cost by retrieving the inputted floral type
+  @Override
   public int calculatingCost(){
     int floralTypeCost=floralType.getCost();
     return floralTypeCost;

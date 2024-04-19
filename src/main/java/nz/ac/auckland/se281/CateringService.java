@@ -7,6 +7,7 @@ public class CateringService extends Service{
   private CateringType cateringType;
   int cost;
 
+  //
   public CateringService(int noOfAttendees, CateringType cateringType, String serviceType){
     super(serviceType);
     this.noOfAttendees=noOfAttendees;
@@ -14,12 +15,14 @@ public class CateringService extends Service{
     this.cost=calculatingCost();
   }
 
+  //Getter method to get inputted cateringtype
   public CateringType getCateringType() {
     return cateringType;
   }
 
   @Override
   public int calculatingCost(){
+    //Cacluclates cost by multiplying number of attendees with correspodning cost for specific catering type
     int cateringTypeCost= noOfAttendees*(cateringType.getCostPerPerson());
     return cateringTypeCost;
   }

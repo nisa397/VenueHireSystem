@@ -19,6 +19,7 @@ public class Booking{
     this.email=email;
     this.attendees=attendees;
     this.bookingRef=bookingRef;
+    //Service list has all services added to it
     servicesList= new ArrayList<Service>();
   }
 

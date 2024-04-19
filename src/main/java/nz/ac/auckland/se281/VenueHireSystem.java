@@ -134,11 +134,10 @@ Date systemDate= new Date(0, 0, 0, "");
     }
 
     //Checking if the venue code is unique or not
-    //method iterates through arraylist, checking if there is a match between inputted venue code
-    // and existing venue codes, and prints error message, and returns false if so
-    // if not, then returns true
   public boolean codeCheck(ArrayList <Venue> venueList, String venueCode, String venueName){
     int count=0;
+    //method iterates through arraylist, checking if there is a match between inputted venue code
+    //and existing venue codes
     for (Venue venue: venueList){
       if (venueCode.equals(venue.venueCode)){
         count++;
@@ -146,36 +145,35 @@ Date systemDate= new Date(0, 0, 0, "");
       }
     }
     
-
+    //prints error message, and returns false if so
     if (count==1){
       MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, venueName);
       return false;
     }
-
+    //otherwise true
     return true;
   }  
 
 
   //Checks if the capacity input is a word number or an actual number
-  //If capacity input is invalid, it returns false, and prints out error message
-    //if capacity input is valid, it returns true 
-    //Accounts for exception if the number 
   public boolean capacityChecker(String capacityInput){
-
+    
     boolean isValid=false;
     int capacityInt=0;
+    //if capacity input is valid, it returns true
     try{
       capacityInt=Integer.parseInt(capacityInput);
       
       isValid= true;
     }
+     //Accounts for exception if the number is in word form or a word is inputted
     catch(NumberFormatException e){
 
     }
-
     if (isValid && capacityInt>=0){
       return true;
     }
+    //If capacity input is invalid, it returns false, and prints out error message
     else {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
       return false;
@@ -184,11 +182,11 @@ Date systemDate= new Date(0, 0, 0, "");
     
 
   //Checks if hire fee input is an actual number and not a word number
-    //If hire fee input is invalid, it returns false, and prints out error message
-    //if hire fee input is valid, it returns true 
+    
   public boolean feeChecker(String hireFeeInput){
       boolean isValid=false;
       int hireFeeInt=0;
+      //if hire fee input is valid, it returns true 
       try{
         hireFeeInt=Integer.parseInt(hireFeeInput);
         
@@ -201,6 +199,7 @@ Date systemDate= new Date(0, 0, 0, "");
       if (isValid && hireFeeInt>=0){
         return true;
       }
+      //If hire fee input is invalid, it returns false, and prints out error message
       else {
         MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
         return false;
@@ -327,17 +326,23 @@ Date systemDate= new Date(0, 0, 0, "");
 
 
   public String nextAvailableDate(Venue venue){
+    //Sets available date to the system date
     String availableDate = systemDate.stringDate;
+    //Checks if the booking list size is greater than 0
     if (venue.bookingList.size()>0){
+      //Checks for when the next available date is, by seeing if the current available date is the same 
+      //as any of the current booking dates
       for (Booking booking: venue.bookingList){
         if (availableDate.equals(booking.requestedDate)){
-
+          //if this is the case it will add 1 to the date
           String[] dateParts = availableDate.split("/");
           int intDay=Integer.parseInt(dateParts[0]) + 1;
+          //Adds the 0 in front of the date if the day is less than 10
           if (intDay<10){
             String stringDay="0"+Integer.toString(intDay);
             availableDate= stringDay + "/" + dateParts[1] + "/"+ dateParts[2];
           }
+          //Converts to string
           else {
             String stringDay=Integer.toString(intDay);
             availableDate= stringDay + "/" + dateParts[1] + "/"+ dateParts[2];
@@ -377,17 +382,7 @@ Date systemDate= new Date(0, 0, 0, "");
     Date bookingDate = new Date(day, month, year, options[1]);
 
     if (isSystemDateSet() && atleastOneVenue() && venueCodePresent(options[0], venueList) && bookingDate.pastDate(systemDate) && isVenueAvailable(options[1], options[0]) ){
-      //Finding where the venue is located and storing that in the venueindex variable
-      /*for (Venue venue: venueList){
-      venueIndex++;
-      if (options[0].equals(venue.venueCode)){
-        break;
-      }
-    }*/
-
-    //Retrieves that specific venue from venueList
-    /*specificVenue=venueList.get(venueIndex);*/
-
+    //Gets specific venue with specificVenueMethod
     specificVenue=getSpecificVenue(options[0], venueList);
 
     //Stores originial attendees to be used later

@@ -6,8 +6,9 @@ public class MusicService extends Service{
     super(serviceType);
   }
 
-
+  @Override
   public int calculatingCost(){
+    //cost is $500 for music service
     return this.cost=500;
   };
 }
