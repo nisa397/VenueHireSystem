@@ -68,17 +68,16 @@ Date systemDate= new Date(0, 0, 0, "");
   // and to indicate whether it is printed in word form or in number form, depening on how many venues there are
   public void printVenues() {
 
-    ArrayList <String> NumberWords= new ArrayList<String>();
-
-    NumberWords.add("one");
-    NumberWords.add("two");
-    NumberWords.add("three");
-    NumberWords.add("four");
-    NumberWords.add("five");
-    NumberWords.add("six");
-    NumberWords.add("seven");
-    NumberWords.add("eight");
-    NumberWords.add("nine");
+    ArrayList <String> numberWords= new ArrayList<String>();n
+    numberWords.add("one");
+    numberWords.add("two");
+    numberWords.add("three");
+    numberWords.add("four");
+    numberWords.add("five");
+    numberWords.add("six");
+    numberWords.add("seven");
+    numberWords.add("eight");
+    numberWords.add("nine");
     
 
 
@@ -113,7 +112,7 @@ Date systemDate= new Date(0, 0, 0, "");
   //Checks if Venue name input is empty or not
   //utilizes isblank to check if the inputted venue name is blank or not, and method returns false, and prints otherwise, if it is blank
   //otherwise returns true
-  public boolean NameCheck(String venueName){
+  public boolean nameCheck(String venueName){
     if (venueName.trim().isBlank()==true){
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
       return false;
@@ -128,7 +127,7 @@ Date systemDate= new Date(0, 0, 0, "");
     //method iterates through arraylist, checking if there is a match between inputted venue code
     // and existing venue codes, and prints error message, and returns false if so
     // if not, then returns true
-  public boolean CodeCheck(ArrayList <Venue> venueList, String venueCode, String venueName){
+  public boolean codeCheck(ArrayList <Venue> venueList, String venueCode, String venueName){
     int count=0;
     for (Venue venue: venueList){
       if (venueCode.equals(venue.venueCode)){
@@ -148,12 +147,12 @@ Date systemDate= new Date(0, 0, 0, "");
   //Checks if the capacity input is a word number or an actual number
   //If capacity input is invalid, it returns false, and prints out error message
     //if capacity input is valid, it returns true 
-  public boolean CapacityChecker(String capacityInput){
+  public boolean capacityChecker(String capacityInput){
 
     boolean isValid=false;
-    int CapacityInt=0;
+    int capacityInt=0;
     try{
-      CapacityInt=Integer.parseInt(capacityInput);
+      capacityInt=Integer.parseInt(capacityInput);
       
       isValid= true;
     }
@@ -161,7 +160,7 @@ Date systemDate= new Date(0, 0, 0, "");
 
     }
 
-    if (isValid && CapacityInt>=0){
+    if (isValid && capacityInt>=0){
       return true;
     }
     else {
@@ -174,7 +173,7 @@ Date systemDate= new Date(0, 0, 0, "");
   //Checks if hire fee input is an actual number and not a word number
     //If hire fee input is invalid, it returns false, and prints out error message
     //if hire fee input is valid, it returns true 
-  public boolean FeeChecker(String hireFeeInput){
+  public boolean feeChecker(String hireFeeInput){
       boolean isValid=false;
       int hireFeeInt=0;
       try{
@@ -207,7 +206,7 @@ Date systemDate= new Date(0, 0, 0, "");
 
     //If all of the inputs are valid, then the venue is added to the system, and the corresponding message is printed out
 
-    if (NameCheck(venueName) && CodeCheck(venueList, venueCode, venueName) && CapacityChecker(capacityInput) && FeeChecker(hireFeeInput)){
+    if (nameCheck(venueName) && codeCheck(venueList, venueCode, venueName) && capacityChecker(capacityInput) && feeChecker(hireFeeInput)){
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(newVenue.venueName, newVenue.venueCode);
       venueList.add(newVenue);
     }
