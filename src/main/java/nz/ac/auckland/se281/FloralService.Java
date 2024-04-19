@@ -7,10 +7,14 @@ public class FloralService extends Service{
 
 
 
-  public FloralService(FloralType floralType, String service){
-    super(service);
+  public FloralService(FloralType floralType, String serviceType){
+    super(serviceType);
     this.floralType=floralType;
     this.cost=calculatingCost();
+  }
+
+  public FloralType getFloralType() {
+    return floralType;
   }
 
   public int calculatingCost(){

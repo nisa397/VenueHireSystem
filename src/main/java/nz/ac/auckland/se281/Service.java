@@ -2,10 +2,10 @@ package nz.ac.auckland.se281;
 
 public abstract class Service{
   int cost;
-  String service;
+  String serviceType;
 
-  public Service(String service){
-    this.service=service;
+  public Service(String serviceType){
+    this.serviceType=serviceType;
   }
 
   abstract public int calculatingCost();

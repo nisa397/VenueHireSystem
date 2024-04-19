@@ -516,15 +516,39 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void viewInvoice(String bookingReference) {
+    int cost=0;
     // TODO implement this method
     if (doesRefExist(allBookings, bookingReference)){
       
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
       Venue specificVenue=getSpecificVenue(specificBooking.venueCode, venueList);
       MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(bookingReference, specificBooking.email, specificBooking.dateOfBooking, specificBooking.requestedDate, specificBooking.attendees, specificVenue.venueName);
-
+      cost=Integer.parseInt(specificVenue.hireFeeInput);
       //Cost Breakdown
       MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(specificVenue.hireFeeInput);
+
+      for (Service service: specificBooking.servicesList){
+
+        if (service instanceof CateringService){
+          cost += service.calculatingCost();
+          CateringService catering= (CateringService) service;
+          //Accessing catering service
+          MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(catering.getCateringType().getName(),Integer.toString(service.calculatingCost()));
+        }
+        else if (service instanceof MusicService){
+          cost +=service.calculatingCost();
+          MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(Integer.toString(service.calculatingCost()));
+        }
+        else if (service instanceof FloralService){
+          cost +=service.calculatingCost();
+          FloralService floral= (FloralService) service;
+          MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(floral.getFloralType().getName(), Integer.toString(service.calculatingCost()));
+        }
+      }
+      MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(Integer.toString(cost));
+    }
+    else {
+      MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     }
     
   }
