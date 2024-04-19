@@ -68,7 +68,7 @@ Date systemDate= new Date(0, 0, 0, "");
   // and to indicate whether it is printed in word form or in number form, depening on how many venues there are
   public void printVenues() {
 
-    ArrayList <String> numberWords= new ArrayList<String>();n
+    ArrayList <String> numberWords= new ArrayList<String>();
     numberWords.add("one");
     numberWords.add("two");
     numberWords.add("three");
@@ -85,24 +85,24 @@ Date systemDate= new Date(0, 0, 0, "");
       MessageCli.NO_VENUES.printMessage();
     }
     else if(venueList.size()==1){
-      MessageCli.NUMBER_VENUES.printMessage("is", NumberWords.get(venueList.size()-1), "");
+      MessageCli.NUMBER_VENUES.printMessage("is", numberWords.get(venueList.size()-1), "");
 
 
-      for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
+      for (Venue iteratorVenue: venueList){
+        MessageCli.VENUE_ENTRY.printMessage(iteratorVenue.venueName, iteratorVenue.venueCode, iteratorVenue.capacityInput, iteratorVenue.hireFeeInput, nextAvailableDate(iteratorVenue) );
       }
     }
     else if (1<venueList.size()&& venueList.size()<10){
 
-      MessageCli.NUMBER_VENUES.printMessage("are", NumberWords.get(venueList.size()-1), "s");
-      for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
+      MessageCli.NUMBER_VENUES.printMessage("are", numberWords.get(venueList.size()-1), "s");
+      for (Venue iteratorVenue: venueList){
+        MessageCli.VENUE_ENTRY.printMessage(iteratorVenue.venueName, iteratorVenue.venueCode, iteratorVenue.capacityInput, iteratorVenue.hireFeeInput, nextAvailableDate(iteratorVenue) );
       }
     }
     else {
       MessageCli.NUMBER_VENUES.printMessage("are",String.valueOf(venueList.size()), "s" );
-      for (Venue IteratorVenue: venueList){
-        MessageCli.VENUE_ENTRY.printMessage(IteratorVenue.venueName, IteratorVenue.venueCode, IteratorVenue.capacityInput, IteratorVenue.hireFeeInput, nextAvailableDate(IteratorVenue) );
+      for (Venue iteratorVenue: venueList){
+        MessageCli.VENUE_ENTRY.printMessage(iteratorVenue.venueName, iteratorVenue.venueCode, iteratorVenue.capacityInput, iteratorVenue.hireFeeInput, nextAvailableDate(iteratorVenue) );
       }
 
     }
