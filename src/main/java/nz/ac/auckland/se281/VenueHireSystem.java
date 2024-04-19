@@ -473,24 +473,35 @@ Date systemDate= new Date(0, 0, 0, "");
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
 
+    //Checks if reference exists within all the bookings 
     if (doesRefExist(allBookings, bookingReference)){
+      //accesseses the specific booking of the inputted boooking reference from the booking list
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      //Converts attendees parameter in booking class from string to integer
       int intAttendees = Integer.parseInt(specificBooking.attendees);
+      //Constructs catering service
       CateringService catering= new CateringService(intAttendees, cateringType, "Catering");
+      //Adds catering service to services list within the specific booking
       specificBooking.servicesList.add(catering);
+      //Gets specific type of catering that was inputted, to be included in the message
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Catering "+"("+cateringType.getName()+")", bookingReference);
     }
     else{
+      //if booking is not found..
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     }
     
   }
 
   public void addServiceMusic(String bookingReference) {
+    ////Checks if reference exists within all the bookings  
     if (doesRefExist(allBookings, bookingReference)){
+       //accesseses the specific booking of the inputted boooking reference from the booking list
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      //Constructs music service and adds it to service list within booking
       MusicService music= new MusicService("Music");
       specificBooking.servicesList.add(music);
+      //Prints successful message
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
     }
     else {
@@ -500,8 +511,11 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
+    ////Checks if reference exists within all the bookings
     if (doesRefExist(allBookings, bookingReference)){
+       //accesseses the specific booking of the inputted boooking reference from the booking list
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
+      //Constructs floral service and adds it to service list in specific booking
       FloralService floral = new FloralService(floralType, "Floral");
       specificBooking.servicesList.add(floral);
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral "+"("+floralType.getName()+")",bookingReference);
@@ -514,30 +528,38 @@ Date systemDate= new Date(0, 0, 0, "");
   }
 
   public void viewInvoice(String bookingReference) {
+    //Initializing cost, to account for exceptions
     int cost=0;
     if (doesRefExist(allBookings, bookingReference)){
       
       Booking specificBooking=getSpecificBooking(bookingReference, allBookings);
       Venue specificVenue=getSpecificVenue(specificBooking.venueCode, venueList);
+      //Top half of invoice
       MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(bookingReference, specificBooking.email, specificBooking.dateOfBooking, specificBooking.requestedDate, specificBooking.attendees, specificVenue.venueName);
+      //converting venue fee to int and adding it to cost
       cost=Integer.parseInt(specificVenue.hireFeeInput);
+
       //Cost Breakdown
       MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(specificVenue.hireFeeInput);
-
+      //Iterates through service list of specific booking checking which services are present, and adding the cost if it is present
       for (Service service: specificBooking.servicesList){
-
+        //Checks if the iterated service is an instance of either of the services
         if (service instanceof CateringService){
+          //Calculating cost of specific service utilzing the method specific to this service
           cost += service.calculatingCost();
+          //Downcasting service instance to CateringService instance to retrieve CateringService instance fields
           CateringService catering= (CateringService) service;
-          //Accessing catering service
           MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(catering.getCateringType().getName(),Integer.toString(service.calculatingCost()));
         }
         else if (service instanceof MusicService){
+          //Calculating cost of specific service utilzing the method specific to this service
           cost +=service.calculatingCost();
           MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(Integer.toString(service.calculatingCost()));
         }
         else if (service instanceof FloralService){
+          //Calculating cost of specific service utilzing the method specific to this service
           cost +=service.calculatingCost();
+          //Downcasting service instance to service instance to retrieve FloralService instance fields
           FloralService floral= (FloralService) service;
           MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(floral.getFloralType().getName(), Integer.toString(service.calculatingCost()));
         }
