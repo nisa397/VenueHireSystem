@@ -1,8 +1,8 @@
 package nz.ac.auckland.se281;
 
 public abstract class Service {
-  int cost;
-  String serviceType;
+  private int cost;
+  private String serviceType;
 
   public Service(String serviceType) {
     this.serviceType = serviceType;
@@ -10,4 +10,8 @@ public abstract class Service {
 
   // Every service calculates cost differently
   public abstract int calculatingCost();
+
+  public String getServiceType() {
+    return serviceType;
+  }
 }

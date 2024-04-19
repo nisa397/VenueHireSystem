@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 public class MusicService extends Service {
-  int cost;
+  private int cost;
 
   public MusicService(String serviceType) {
     super(serviceType);
@@ -13,4 +13,8 @@ public class MusicService extends Service {
     return this.cost = 500;
   }
   ;
+
+  public int getCost() {
+    return this.cost;
+  }
 }

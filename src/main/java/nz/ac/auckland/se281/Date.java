@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
 public class Date {
-  int day;
-  int month;
-  int year;
-  String stringDate;
+  private int day = 0;
+  private int month = 0;
+  private int year = 0;
+  private String stringDate = "";
 
   public Date(int day, int month, int year, String stringDate) {
     this.day = day;
@@ -30,5 +30,37 @@ public class Date {
     }
 
     return true;
+  }
+
+  public int getDay() {
+    return this.day;
+  }
+
+  public void setDay(int day) {
+    this.day = day;
+  }
+
+  public int getMonth() {
+    return this.month;
+  }
+
+  public void setMonth(int month) {
+    this.month = month;
+  }
+
+  public String getStringDate() {
+    return this.stringDate;
+  }
+
+  public void setStringDate(String stringDate) {
+    this.stringDate = stringDate;
+  }
+
+  public int getYear() {
+    return this.year;
+  }
+
+  public void setYear(int year) {
+    this.year = year;
   }
 }

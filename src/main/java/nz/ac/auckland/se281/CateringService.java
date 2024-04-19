@@ -5,7 +5,7 @@ import nz.ac.auckland.se281.Types.CateringType;
 public class CateringService extends Service {
   private int noOfAttendees;
   private CateringType cateringType;
-  int cost;
+  private int cost;
 
   //
   public CateringService(int noOfAttendees, CateringType cateringType, String serviceType) {
@@ -26,5 +26,9 @@ public class CateringService extends Service {
     // catering type
     int cateringTypeCost = noOfAttendees * (cateringType.getCostPerPerson());
     return cateringTypeCost;
+  }
+
+  public int getCost() {
+    return this.cost;
   }
 }

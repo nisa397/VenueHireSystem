@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Types.FloralType;
 
 public class FloralService extends Service {
-  int cost;
+  private int cost;
   private FloralType floralType;
 
   // Constructor, calculates cost everytime the floralservice constructor is called
@@ -22,5 +22,9 @@ public class FloralService extends Service {
   public int calculatingCost() {
     int floralTypeCost = floralType.getCost();
     return floralTypeCost;
+  }
+
+  public int getCost() {
+    return this.cost;
   }
 }
